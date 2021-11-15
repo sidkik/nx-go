@@ -50,7 +50,8 @@
             ]
           }
         }
-      }
+      },
+      "tags": []
     },
     "nx-go-e2e": {
       "projectType": "application",
@@ -67,11 +68,10 @@
             "tsSpecConfig": "e2e/nx-go-e2e/tsconfig.spec.json"
           }
         }
-      }
+      },
+      "tags": [],
+      "implicitDependencies": ["nx-go"]
     }
-  },
-  "cli": {
-    "defaultCollection": "@nrwl/workspace"
   },
   "schematics": {
     "@nrwl/workspace": {
