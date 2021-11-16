@@ -2,26 +2,25 @@
   "root": "packages/nx-go",
   "sourceRoot": "packages/nx-go/src",
   "projectType": "library",
-  "schematics": {},
-  "architect": {
+  "targets": {
     "lint": {
-      "builder": "@nrwl/linter:lint",
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
       "options": {
-        "linter": "eslint",
-        "tsConfig": ["packages/nx-go/tsconfig.lib.json", "packages/nx-go/tsconfig.spec.json"],
-        "exclude": ["**/node_modules/**", "!packages/nx-go/**/*"]
+        "lintFilePatterns": ["packages/nx-go/**/*.ts"]
       }
     },
     "test": {
-      "builder": "@nrwl/jest:jest",
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/packages/nx-go"],
       "options": {
         "jestConfig": "packages/nx-go/jest.config.js",
-        "tsConfig": "packages/nx-go/tsconfig.spec.json",
         "passWithNoTests": true
       }
     },
     "build": {
-      "builder": "@nrwl/node:package",
+      "executor": "@nrwl/node:package",
+      "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/packages/nx-go",
         "tsConfig": "packages/nx-go/tsconfig.lib.json",
