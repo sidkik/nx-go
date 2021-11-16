@@ -1,6 +1,7 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema",
-  "id": "NxGoLibrary",
+  "$schema": "http://json-schema.org/schema",
+  "cli": "nx",
+  "$id": "NxGoLibrary",
   "title": "",
   "type": "object",
   "properties": {

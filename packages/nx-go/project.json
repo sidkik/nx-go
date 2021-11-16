@@ -31,17 +31,22 @@
           "packages/nx-go/*.md",
           {
             "input": "./packages/nx-go/src",
-            "glob": "**/*.!(ts)",
+            "glob": "**/!(*.ts)",
+            "output": "./src"
+          },
+          {
+            "input": "./packages/nx-go/src",
+            "glob": "**/*.d.ts",
             "output": "./src"
           },
           {
             "input": "./packages/nx-go",
-            "glob": "collection.json",
+            "glob": "generators.json",
             "output": "."
           },
           {
             "input": "./packages/nx-go",
-            "glob": "builders.json",
+            "glob": "executors.json",
             "output": "."
           }
         ]

@@ -4,7 +4,12 @@ import { schema } from '@angular-devkit/core'
 import { join } from 'path'
 import { ServeBuilderSchema } from './schema'
 
-const options: ServeBuilderSchema = {}
+const options: ServeBuilderSchema = {
+  cmd: '',
+  cwd: '',
+  main: '',
+  outputPath: ''
+}
 
 describe('Command Runner Builder', () => {
   let architect: Architect
