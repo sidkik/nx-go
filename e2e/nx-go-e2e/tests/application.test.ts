@@ -29,7 +29,7 @@ describe('application e2e', () => {
     await runNxCommandAsync(`generate @nx-go/nx-go:library ${libName} --directory=${appName}`)
     expect(() => checkFilesExist(`libs/${appName}/${libName}/${appName}-${libName}.go`)).not.toThrow()
     done()
-  })
+  }, 120000)
 
   describe('--directory', () => {
     it('should create main.go in the specified directory', async (done) => {
@@ -38,17 +38,17 @@ describe('application e2e', () => {
       await runNxCommandAsync(`generate @nx-go/nx-go:application ${plugin} --directory subdir`)
       expect(() => checkFilesExist(`apps/subdir/${plugin}/main.go`)).not.toThrow()
       done()
-    })
+    }, 120000)
   })
 
   describe('--tags', () => {
-    it('should add tags to nx.json', async (done) => {
+    it('should add tags to the project', async (done) => {
       const plugin = uniq('nx-go')
       ensureNxProject('@nx-go/nx-go', 'dist/packages/nx-go')
       await runNxCommandAsync(`generate @nx-go/nx-go:application ${plugin} --tags e2etag,e2ePackage`)
-      const nxJson = readJson('nx.json')
-      expect(nxJson.projects[plugin].tags).toEqual(['e2etag', 'e2ePackage'])
+      const project = readJson(`libs/${plugin}/project.json`)
+      expect(project.tags).toEqual(['e2etag', 'e2ePackage'])
       done()
-    })
+    }, 120000)
   })
 })
