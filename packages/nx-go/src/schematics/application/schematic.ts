@@ -1,6 +1,5 @@
 import { apply, applyTemplates, chain, mergeWith, move, Rule, url } from '@angular-devkit/schematics'
 import {
-  addProjectToNxJsonInTree,
   names,
   offsetFromRoot,
   projectRootDir,
@@ -82,15 +81,16 @@ export default function (options: ApplicationSchematicSchema): Rule {
         sourceRoot,
         projectType,
       })
-      const options = {
-        outputPath: join(normalize('dist'), appProjectRoot),
-        main: join(project.sourceRoot, 'main.go'),
-      }
+
       project.targets.add({
         name: 'build',
         builder: '@nx-go/nx-go:build',
-        options,
+        options: {
+          outputPath: join(normalize('dist'), appProjectRoot),
+          main: join(project.sourceRoot, 'main.go'),
+        },
       })
+
       project.targets.add({
         name: 'serve',
         builder: '@nx-go/nx-go:serve',
@@ -98,17 +98,16 @@ export default function (options: ApplicationSchematicSchema): Rule {
           main: join(project.sourceRoot, 'main.go'),
         },
       })
+
       project.targets.add({
         name: 'test',
         builder: '@nx-go/nx-go:test',
       })
+
       project.targets.add({
         name: 'lint',
         builder: '@nx-go/nx-go:lint',
       })
-    }),
-    addProjectToNxJsonInTree(normalizedOptions.projectName, {
-      tags: normalizedOptions.parsedTags,
     }),
     addFiles(normalizedOptions),
     createGoMod(normalizedOptions),
