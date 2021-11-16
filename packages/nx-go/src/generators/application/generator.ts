@@ -54,6 +54,16 @@ function addFiles(tree: Tree, options: NormalizedSchema) {
     options.projectRoot,
     templateOptions
   );
+
+  if (options.skipGoMod === false) {
+    const modFile = 'go.mod'
+    if (!tree.exists(`${modFile}`)) {
+      const nxJson = tree.read('nx.json');
+      const npmScope = nxJson ? JSON.parse(nxJson.toString()).npmScope : 'main'
+      
+      tree.write(`${modFile}`, `module ${npmScope}\n`)
+    }
+  }
 }
 
 export default async function (tree: Tree, options: ApplicationGeneratorSchema) {
