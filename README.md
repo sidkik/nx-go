@@ -141,4 +141,4 @@ CMD [ "/workspace/api" ]
 
 ## MIT License
 
-Created by [Bram Borggreve](https://github.com/beeman).
+Created by [Bram Borggreve](https://github.com/beeman) & Updated by [Mike Scheurwater](https://github.com/MikeScheurwater).
