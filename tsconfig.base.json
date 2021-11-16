@@ -16,7 +16,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "nx-go/nx-go": ["libs/nx-go/src/index.ts"]
+      "nx-go/nx-go": ["packages/nx-go/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

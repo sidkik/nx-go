@@ -27,11 +27,9 @@
   },
   "private": true,
   "dependencies": {
-    "@nrwl/nx-cloud": "^12.5.2"
+    "tslib": "^2.0.0"
   },
   "devDependencies": {
-    "@angular-devkit/architect": "^0.1300.2",
-    "@angular-devkit/schematics": "^13.0.2",
     "@nrwl/cli": "13.1.4",
     "@nrwl/devkit": "13.1.4",
     "@nrwl/eslint-plugin-nx": "13.1.4",
@@ -45,7 +43,6 @@
     "@types/node": "14.14.33",
     "@typescript-eslint/eslint-plugin": "~4.33.0",
     "@typescript-eslint/parser": "~4.33.0",
-    "dotenv": "10.0.0",
     "eslint": "7.32.0",
     "eslint-config-prettier": "8.1.0",
     "husky": "^7.0.4",
