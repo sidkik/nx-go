@@ -1,20 +1,9 @@
 {
-  "$schema": "https://json-schema.org/draft-07/schema",
-  "$id": "https://json-schema.org/draft-07/schema",
-  "title": "Build builder",
+  "$schema": "http://json-schema.org/schema",
+  "cli": "nx",
+  "title": "Test executor",
   "description": "",
   "type": "object",
-  "properties": {
-    "skipCover": {
-      "type": "boolean",
-      "description": "Skip coverage analysis.",
-      "default": false
-    },
-    "skipRace": {
-      "type": "boolean",
-      "description": "Skip data race detection.",
-      "default": false
-    }
-  },
+  "properties": {},
   "required": []
 }

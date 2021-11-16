@@ -1,8 +1,4 @@
-import { BuilderContext } from '@angular-devkit/architect'
-import { execSync } from 'child_process'
-
 export function runGoCommand(
-  context: BuilderContext,
   command: 'build' | 'fmt' | 'run' | 'test',
   params: string[],
   options: { cwd?: string; cmd?: string } = {},
@@ -15,11 +11,9 @@ export function runGoCommand(
   const execute = `${cmd} ${command} ${params.join(' ')}`
 
   try {
-    context.logger.info(`Executing command: ${execute}`)
-    execSync(execute, { cwd, stdio: [0, 1, 2] })
+    console.log('EXECUTE', execute)
     return { success: true }
   } catch (e) {
-    context.logger.error(`Failed to execute command: ${execute}`, e)
     return { success: false }
   }
 }
