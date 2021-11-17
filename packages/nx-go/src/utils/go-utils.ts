@@ -1,3 +1,5 @@
+import { execSync } from "child_process"
+
 export function runGoCommand(
   command: 'build' | 'fmt' | 'run' | 'test',
   params: string[],
@@ -11,7 +13,7 @@ export function runGoCommand(
   const execute = `${cmd} ${command} ${params.join(' ')}`
 
   try {
-    console.log('EXECUTE', execute, { cwd, stdio: [0, 1, 2] })
+    execSync(execute, { cwd, stdio: [0, 1, 2] })
     return { success: true }
   } catch (e) {
     return { success: false }
