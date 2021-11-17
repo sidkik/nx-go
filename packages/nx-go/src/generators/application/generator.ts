@@ -7,7 +7,6 @@ import {
   offsetFromRoot,
   Tree,
 } from '@nrwl/devkit';
-import * as path from 'path';
 import { join, normalize } from 'path';
 import { ApplicationGeneratorSchema } from './schema';
 
@@ -50,7 +49,7 @@ function addFiles(tree: Tree, options: NormalizedSchema) {
   };
   generateFiles(
     tree,
-    path.join(__dirname, 'files'),
+    join(__dirname, 'files'),
     options.projectRoot,
     templateOptions
   );
@@ -60,7 +59,7 @@ function addFiles(tree: Tree, options: NormalizedSchema) {
     if (!tree.exists(`${modFile}`)) {
       const nxJson = tree.read('nx.json');
       const npmScope = nxJson ? JSON.parse(nxJson.toString()).npmScope : 'main'
-      
+
       tree.write(`${modFile}`, `module ${npmScope}\n`)
     }
   }
