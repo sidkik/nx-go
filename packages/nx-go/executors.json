@@ -2,23 +2,23 @@
   "$schema": "http://json-schema.org/schema",
   "executors": {
     "build": {
-      "implementation": "./src/builders/build/builder",
-      "schema": "./src/builders/build/schema.json",
+      "implementation": "./src/executors/build/executor",
+      "schema": "./src/executors/build/schema.json",
       "description": "build executor"
     },
     "lint": {
-      "implementation": "./src/builders/lint/builder",
-      "schema": "./src/builders/lint/schema.json",
+      "implementation": "./src/executors/lint/executor",
+      "schema": "./src/executors/lint/schema.json",
       "description": "lint executor"
     },
     "serve": {
-      "implementation": "./src/builders/serve/builder",
-      "schema": "./src/builders/serve/schema.json",
+      "implementation": "./src/executors/serve/executor",
+      "schema": "./src/executors/serve/schema.json",
       "description": "serve executor"
     },
     "test": {
-      "implementation": "./src/builders/test/builder",
-      "schema": "./src/builders/test/schema.json",
+      "implementation": "./src/executors/test/executor",
+      "schema": "./src/executors/test/schema.json",
       "description": "test executor"
     }
   }
