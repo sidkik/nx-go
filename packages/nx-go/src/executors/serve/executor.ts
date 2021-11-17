@@ -13,7 +13,5 @@ export default async function runExecutor(options: ServeExecutorSchema, context:
   // We strip the project root from the main file
   const mainFile = options.main?.replace(`${projectSourceRoot}/`, '')
 
-  return {
-    success: runGoCommand('run', [mainFile], { cwd })
-  };
+  return runGoCommand('run', [mainFile], { cwd });
 }

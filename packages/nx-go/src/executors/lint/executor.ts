@@ -12,7 +12,5 @@ export default async function runExecutor(_options: LintExecutorSchema, context:
 
   const sources = './...'
 
-  return {
-    success: runGoCommand('fmt', [sources], { cwd }),
-  };
+  return runGoCommand('fmt', [sources], { cwd });;
 }

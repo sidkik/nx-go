@@ -14,7 +14,5 @@ export default async function runExecutor(options: TestExecutorSchema, context: 
   const cover = options.skipCover ? '' : '-cover'
   const race = options.skipRace ? '' : '-race'
 
-  return {
-    success: runGoCommand('test', [sources, cover, race], { cwd }),
-  };
+  return runGoCommand('test', [sources, cover, race], { cwd });
 }
