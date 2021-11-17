@@ -14,6 +14,7 @@ interface NormalizedSchema extends ApplicationGeneratorSchema {
   projectName: string;
   projectRoot: string;
   projectDirectory: string;
+  projectSourceRoot: string;
   parsedTags: string[];
 }
 
@@ -27,6 +28,7 @@ function normalizeOptions(
     : name;
   const projectName = projectDirectory.replace(new RegExp('/', 'g'), '-');
   const projectRoot = `${getWorkspaceLayout(tree).appsDir}/${projectDirectory}`;
+  const projectSourceRoot = `${projectRoot}/src`;
   const parsedTags = options.tags
     ? options.tags.split(',').map((s) => s.trim())
     : [];
@@ -36,6 +38,7 @@ function normalizeOptions(
     projectName,
     projectRoot,
     projectDirectory,
+    projectSourceRoot,
     parsedTags,
   };
 }
@@ -70,19 +73,19 @@ export default async function (tree: Tree, options: ApplicationGeneratorSchema) 
   addProjectConfiguration(tree, normalizedOptions.projectName, {
     root: normalizedOptions.projectRoot,
     projectType: 'application',
-    sourceRoot: `${normalizedOptions.projectRoot}/src`,
+    sourceRoot: normalizedOptions.projectSourceRoot,
     targets: {
       build: {
         executor: '@nx-go/nx-go:build',
         options: {
           outputPath: join(normalize('dist'), normalizedOptions.projectRoot),
-          main: join(normalizedOptions.projectRoot, 'main.go'),
+          main: join(normalizedOptions.projectSourceRoot, 'main.go'),
         },
       },
       serve: {
         executor: '@nx-go/nx-go:serve',
         options: {
-          main: join(normalizedOptions.projectRoot, 'main.go'),
+          main: join(normalizedOptions.projectSourceRoot, 'main.go'),
         },
       },
       test: {

@@ -7,11 +7,11 @@ export default async function runExecutor(options: ServeExecutorSchema, context:
   if (!context.projectName) {
     throw new Error('No projectName')
   }
-  const project = context.workspace.projects[context.projectName];
-  const cwd = join(context.cwd, project.sourceRoot)
+  const projectSourceRoot = context.workspace.projects[context.projectName].sourceRoot;
+  const cwd = join(context.cwd, projectSourceRoot)
 
   // We strip the project root from the main file
-  const mainFile = options.main?.replace(`${project.root}/`, '')
+  const mainFile = options.main?.replace(`${projectSourceRoot}/`, '')
 
   return {
     success: runGoCommand('run', [mainFile], { cwd })
