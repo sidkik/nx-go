@@ -16,7 +16,7 @@ export function runGoCommand(
     execSync(execute, { cwd, stdio: [0, 1, 2] })
     return { success: true }
   } catch (e) {
-    console.error(e.error.message)
+    console.error(e)
     return { success: false }
   }
 }
