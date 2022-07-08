@@ -1,5 +1,8 @@
 {
   "version": 2,
+  "cli": {
+    "packageManager": "npm"
+  },
   "projects": {
     "nx-go": "packages/nx-go",
     "nx-go-e2e": "e2e/nx-go-e2e"

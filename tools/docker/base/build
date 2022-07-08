@@ -1,0 +1,29 @@
+#!/bin/bash
+set -eu -o pipefail
+
+#
+# Build the Docker image
+#
+# Usage:
+#   <<
+#     $ ./build
+#   <<
+#
+# Requires:
+#	- docker
+#
+# References:
+#   - 'firebase-tools' releases
+#     -> https://github.com/firebase/firebase-tools/releases
+
+# Note: Keep the variable name, read from 'push-to-gcr'.
+_VERSION=2.1.0-6
+_TOKEN=$TOKEN # Env github token
+
+_IMAGE_NAME=ghcr.io/sidkik/nx-go
+
+# Note: '-nodeXY-npmZ' is NOT connected with what the base image in 'Dockerfile' provides. MAINTAIN MANUALLY!!!
+_TAG=${_VERSION}
+
+docker build --pull --progress=plain --build-arg GITHUB_TOKEN=${_TOKEN} . -t ${_IMAGE_NAME}:${_TAG}
+docker push ${_IMAGE_NAME}:${_TAG}

@@ -7,23 +7,21 @@ import {
   offsetFromRoot,
   Tree,
 } from '@nrwl/devkit'
-import { join, normalize } from 'path'
-import { ApplicationGeneratorSchema } from './schema'
+import { join } from 'path'
+import { PackageSchematicSchema } from './schema'
 
-interface NormalizedSchema extends ApplicationGeneratorSchema {
+interface NormalizedSchema extends PackageSchematicSchema {
   projectName: string
   projectRoot: string
   projectDirectory: string
-  projectSourceRoot: string
   parsedTags: string[]
 }
 
-function normalizeOptions(tree: Tree, options: ApplicationGeneratorSchema): NormalizedSchema {
+function normalizeOptions(tree: Tree, options: PackageSchematicSchema): NormalizedSchema {
   const name = names(options.name).fileName
   const projectDirectory = options.directory ? `${names(options.directory).fileName}/${name}` : name
   const projectName = projectDirectory.replace(new RegExp('/', 'g'), '-')
-  const projectRoot = `${getWorkspaceLayout(tree).appsDir}/${projectDirectory}`
-  const projectSourceRoot = `${projectRoot}/src`
+  const projectRoot = `${getWorkspaceLayout(tree).libsDir}/${projectDirectory}`
   const parsedTags = options.tags ? options.tags.split(',').map((s) => s.trim()) : []
 
   return {
@@ -31,7 +29,6 @@ function normalizeOptions(tree: Tree, options: ApplicationGeneratorSchema): Norm
     projectName,
     projectRoot,
     projectDirectory,
-    projectSourceRoot,
     parsedTags,
   }
 }
@@ -44,38 +41,15 @@ function addFiles(tree: Tree, options: NormalizedSchema) {
     template: '',
   }
   generateFiles(tree, join(__dirname, 'files'), options.projectRoot, templateOptions)
-
-  if (options.skipGoMod === false) {
-    const modFile = 'go.mod'
-    if (!tree.exists(`${modFile}`)) {
-      const nxJson = tree.read('nx.json')
-      const npmScope = nxJson ? JSON.parse(nxJson.toString()).npmScope : 'main'
-
-      tree.write(`${modFile}`, `module ${npmScope}\n`)
-    }
-  }
 }
 
-export default async function (tree: Tree, options: ApplicationGeneratorSchema) {
+export default async function (tree: Tree, options: PackageSchematicSchema) {
   const normalizedOptions = normalizeOptions(tree, options)
   addProjectConfiguration(tree, normalizedOptions.projectName, {
     root: normalizedOptions.projectRoot,
-    projectType: 'application',
-    sourceRoot: normalizedOptions.projectSourceRoot,
+    projectType: 'library',
+    sourceRoot: `${normalizedOptions.projectRoot}/src`,
     targets: {
-      build: {
-        executor: '@sidkik/nx-go:build',
-        options: {
-          outputPath: join(normalize('dist'), normalizedOptions.projectRoot),
-          main: join(normalizedOptions.projectSourceRoot, 'main.go'),
-        },
-      },
-      serve: {
-        executor: '@sidkik/nx-go:serve',
-        options: {
-          main: join(normalizedOptions.projectSourceRoot, 'main.go'),
-        },
-      },
       test: {
         executor: '@sidkik/nx-go:test',
       },

@@ -1,6 +1,6 @@
 {
-  "name": "nx-go",
-  "version": "2.0.0",
+  "name": "@sidkik/nx-go",
+  "version": "2.1.0",
   "license": "MIT",
   "scripts": {
     "nx": "nx",
@@ -9,6 +9,7 @@
     "test": "nx test",
     "lint": "nx workspace-lint && nx lint",
     "e2e": "nx e2e",
+    "prepare": "npm run build nx-go && cd dist/packages/nx-go && npm publish --access public",
     "affected:apps": "nx affected:apps",
     "affected:libs": "nx affected:libs",
     "affected:build": "nx affected:build",
@@ -28,6 +29,13 @@
   "private": true,
   "dependencies": {
     "tslib": "^2.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sidkik/nx-go.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   },
   "devDependencies": {
     "@nrwl/cli": "13.1.4",
@@ -59,7 +67,7 @@
   },
   "lint-staged": {
     "*.{js,json,css,scss,md,ts,html,graphql}": [
-      "yarn run format --uncommitted"
+      "npm run format --uncommitted"
     ]
   }
 }

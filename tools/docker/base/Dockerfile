@@ -1,22 +1,32 @@
-FROM node:17-alpine
+FROM node:17-buster AS BUILDER
+ARG GITHUB_TOKEN
 
 WORKDIR /workspace
 
-RUN yarn config set cache-folder ~/.yarn
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y git make tar 
 
-RUN apk add --update --no-cache git tar curl vim zsh the_silver_searcher shadow
+RUN wget https://dl.google.com/go/go1.17.6.linux-amd64.tar.gz && tar -C /usr/local -xzf go1.17.6.linux-amd64.tar.gz
 
-RUN sh -c "$(curl -fsSL https://raw.github.com/beeman/server-shell/master/tools/install.sh)"
+ENV PATH /usr/local/go/bin:$PATH
+ENV GOPATH /usr/local/go
 
-RUN usermod -s /bin/zsh root
+RUN go install gotest.tools/gotestsum@latest
 
-RUN apk add --no-cache git make musl-dev go
+COPY *.json .
 
-# Configure Go
-ENV GOROOT /usr/lib/go
-ENV GOPATH /go
-ENV PATH /go/bin:$PATH
+RUN echo "//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}" > ~/.npmrc
 
-RUN mkdir -p ${GOPATH}/src ${GOPATH}/bin
+RUN npm config set @sidkik:registry https://npm.pkg.github.com && npm i
 
-ENTRYPOINT ["/bin/zsh"]
+FROM node:17-buster-slim
+
+WORKDIR /workspace
+RUN set -x && apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y git wget curl && rm -rf /var/lib/apt/lists/*
+COPY --from=BUILDER /workspace/node_modules ./node_modules
+COPY --from=BUILDER /usr/local/go /usr/local/go
+
+ENV PATH /usr/local/go/bin:$PATH
+ENV GOPATH /usr/local/go
+ENV CGO_ENABLED=0
+
+ENTRYPOINT ["/bin/bash"]

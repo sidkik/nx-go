@@ -1,12 +1,12 @@
 {
-  "name": "@nx-go/nx-go",
-  "version": "2.0.0",
+  "name": "@sidkik/nx-go",
+  "version": "2.1.0",
   "main": "src/index.js",
   "generators": "./generators.json",
   "executors": "./executors.json",
-  "homepage": "https://github.com/nx-go/nx-go",
+  "homepage": "https://github.com/sidkik/nx-go",
   "bugs": {
-    "url": "https://github.com/nx-go/nx-go/issues"
+    "url": "https://github.com/sidkik/nx-go/issues"
   },
   "license": "MIT"
 }
