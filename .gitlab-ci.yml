@@ -3,28 +3,31 @@ image: node:16
 stages:
   - deploy
 
-deploy-docker:
-  only:
-    variables:
-      - $CI_COMMIT_TAG != null
-  stage: deploy
-  image:
-    name: gcr.io/kaniko-project/executor:debug
-    entrypoint: ['']
-  script:
-    - >-
-      /kaniko/executor
-      --context="${CI_PROJECT_DIR}"
-      --cache=true
-      --cache-ttl=730h
-      --dockerfile="${CI_PROJECT_DIR}/tools/docker/base/Dockerfile"
-      --destination="registry.gitlab.com/sidkik-open/nx/nx-go:${CI_COMMIT_TAG}"
+# deploy-docker:
+#   only:
+#     variables:
+#       - $CI_COMMIT_TAG != null
+#   stage: deploy
+#   image:
+#     name: gcr.io/kaniko-project/executor:debug
+#     entrypoint: ['']
+#   script:
+#     - >-
+#       /kaniko/executor
+#       --context="${CI_PROJECT_DIR}"
+#       --cache=true
+#       --cache-ttl=730h
+#       --dockerfile="${CI_PROJECT_DIR}/tools/docker/base/Dockerfile"
+#       --destination="registry.gitlab.com/sidkik-open/nx/nx-go:${CI_COMMIT_TAG}"
 
 deploy-package:
-  only:
-    variables:
-      - $CI_COMMIT_TAG != null
+  # only:
+  #   variables:
+  #     - $CI_COMMIT_TAG != null
   stage: deploy
   script:
+    - pwd
     - npm i --cache .npm --prefer-offline
+    - npm config set @sidkik:registry https://gitlab.com/api/v4/projects/38581281/packages/npm/
+    - npm config set -- '//gitlab.com/api/v4/projects/38581281/packages/npm/:_authToken' "${NPM_TOKEN}"
     - npm run prepare
