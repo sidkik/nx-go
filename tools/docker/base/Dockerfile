@@ -14,9 +14,7 @@ RUN go install gotest.tools/gotestsum@latest
 
 COPY *.json .
 
-RUN echo "//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}" > ~/.npmrc
-
-RUN npm config set @sidkik:registry https://npm.pkg.github.com && npm i
+RUN echo @sidkik:registry=https://gitlab.com/api/v4/projects/38581281/packages/npm/ >> .npmrc && npm i
 
 FROM node:17-buster-slim
 
