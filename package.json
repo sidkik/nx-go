@@ -1,5 +1,5 @@
 {
-  "name": "@sidkik/nx-go",
+  "name": "@sidkik-open/nx-go",
   "version": "2.1.0",
   "license": "MIT",
   "scripts": {
@@ -9,7 +9,7 @@
     "test": "nx test",
     "lint": "nx workspace-lint && nx lint",
     "e2e": "nx e2e",
-    "prepare": "npm run build nx-go && cd dist/packages/nx-go && npm publish --tag sidkik",
+    "prepare": "npm run build nx-go && cd dist/packages/nx-go && npm publish",
     "affected:apps": "nx affected:apps",
     "affected:libs": "nx affected:libs",
     "affected:build": "nx affected:build",

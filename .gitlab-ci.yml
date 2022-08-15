@@ -29,7 +29,7 @@ deploy-package:
     - pwd
     - printenv
     # - cd ${CI_PROJECT_DIR}
-    - npm config set @sidkik:registry https://gitlab.com/api/v4/projects/38581281/packages/npm/
+    - npm config set @sidkik-open:registry https://gitlab.com/api/v4/projects/38581281/packages/npm/
     - npm config set -- '//gitlab.com/api/v4/projects/38581281/packages/npm/:_authToken' "${NPM_TOKEN}"
     - npm i --cache .npm --prefer-offline
     - npm run prepare
