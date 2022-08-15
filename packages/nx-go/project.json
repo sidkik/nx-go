@@ -19,7 +19,7 @@
       }
     },
     "build": {
-      "executor": "@nrwl/node:package",
+      "executor": "@nrwl/node:webpack",
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/packages/nx-go",
@@ -27,7 +27,6 @@
         "packageJson": "packages/nx-go/package.json",
         "main": "packages/nx-go/src/index.ts",
         "assets": [
-          "packages/nx-go/*.md",
           {
             "input": "./packages/nx-go/src",
             "glob": "**/!(*.ts)",
