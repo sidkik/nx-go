@@ -1,5 +1,5 @@
 {
-  "name": "@sidkik-open/nx-go",
+  "name": "@sidkik/nx-go",
   "version": "2.1.0",
   "main": "src/index.js",
   "generators": "./generators.json",
