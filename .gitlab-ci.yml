@@ -20,7 +20,7 @@ deploy-docker:
       --cache=true
       --cache-ttl=730h
       --dockerfile="${CI_PROJECT_DIR}/tools/docker/base/Dockerfile"
-      --destination="registry.gitlab.com/sidkik-open/nx/nx-go:2.1.0
+      --destination="registry.gitlab.com/sidkik-open/nx/nx-go:2.1.0"
 
   #${CI_COMMIT_TAG}"
 
