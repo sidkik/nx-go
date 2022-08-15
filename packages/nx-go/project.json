@@ -44,6 +44,11 @@
           },
           {
             "input": "./packages/nx-go",
+            "glob": "package.json",
+            "output": "."
+          },
+          {
+            "input": "./packages/nx-go",
             "glob": "executors.json",
             "output": "."
           }
