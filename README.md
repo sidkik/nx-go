@@ -142,3 +142,11 @@ CMD [ "/workspace/api" ]
 ## MIT License
 
 Created by [Bram Borggreve](https://github.com/beeman) & Updated by [Mike Scheurwater](https://github.com/MikeScheurwater).
+
+
+## Publishing
+npm config set @sidkik-open:registry https://gitlab.com/api/v4/projects/38581281/packages/npm/
+npm config set @sidkik:registry https://gitlab.com/api/v4/projects/38581281/packages/npm/
+<!-- npm config set @sidkik:registry https://gitlab.com/api/v4/packages/npm/  -->
+npm config set -- '//gitlab.example.com/api/v4/packages/npm/:_authToken' "${NPM_TOKEN}"
+npm config set -- '//gitlab.com/api/v4/projects/38581281/packages/npm/:_authToken' "${NPM_TOKEN}"

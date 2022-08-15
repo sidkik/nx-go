@@ -32,10 +32,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/sidkik/nx-go.git"
+    "url": "https://gitlab.com/sidkik-open/nx/nx-go.git"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "registry": "https://gitlab.com/api/v4/projects/38581281/packages/npm/"
   },
   "devDependencies": {
     "@nrwl/cli": "13.1.4",

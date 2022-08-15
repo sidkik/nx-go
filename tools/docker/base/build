@@ -20,7 +20,7 @@ set -eu -o pipefail
 _VERSION=2.1.0-6
 _TOKEN=$TOKEN # Env github token
 
-_IMAGE_NAME=ghcr.io/sidkik/nx-go
+_IMAGE_NAME=registry.gitlab.com/sidkik-open/nx/nx-go
 
 # Note: '-nodeXY-npmZ' is NOT connected with what the base image in 'Dockerfile' provides. MAINTAIN MANUALLY!!!
 _TAG=${_VERSION}
