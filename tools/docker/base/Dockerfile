@@ -14,7 +14,7 @@ RUN go install gotest.tools/gotestsum@latest
 
 COPY *.json .
 
-RUN echo @sidkik:registry=https://gitlab.com/api/v4/projects/38581281/packages/npm/ >> .npmrc && npm i && npm i @sidkik/nx-go
+RUN echo @sidkik:registry=https://gitlab.com/api/v4/projects/38581281/packages/npm/ >> .npmrc && npm i && npm i @sidkik/nx-go && rm -rf /workspace/node_modules/.cache/nx/d
 
 FROM node:17-buster-slim
 
